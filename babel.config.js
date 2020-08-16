@@ -3,10 +3,13 @@ module.exports = {
     [
       '@babel/env',
       {
+        modules: false,
         targets: {
-          browsers: ['> 1%', 'last 2 versions', 'not ie <= 8', 'ie >= 11'],
+          esmodules: true,
+          browsers: ['> 1%', 'last 2 versions'],
         },
       },
     ],
+    ['@vue/babel-preset-jsx', { injectH: false }],
   ],
 };
