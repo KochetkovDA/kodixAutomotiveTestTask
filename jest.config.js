@@ -3,11 +3,12 @@ module.exports = {
   coverageDirectory: 'coverage',
   moduleFileExtensions: ['vue', 'js'],
   moduleNameMapper: {
-    '^src(.*)': '<rootDir>/src$1',
+    '^@/(.*)$': '<rootDir>/src/$1',
   },
   testEnvironment: 'node',
   transform: {
-    '^.+\\.js$': '<rootDir>/node_modules/babel-jest',
+    '^.+\\.(js|jsx)?$': '<rootDir>/node_modules/babel-jest',
     '.*\\.(vue)$': '<rootDir>/node_modules/vue-jest',
   },
+  transformIgnorePatterns: ['<rootDir>/node_modules/'],
 };
