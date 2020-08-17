@@ -10,7 +10,7 @@
  */
 
 /**
- * Моудль стора
+ * Моудль стора для работы с машинами
  * @param {{services: object}} - зависимости в виде объекта
  * @returns {object} модуль стора
  */
@@ -27,9 +27,7 @@ export default function createCarsStore({ carsServices }) {
     },
 
     getters: {
-      carsList: ({ cars }) => {
-        return cars;
-      },
+      carsList: ({ cars }) => cars,
     },
 
     actions: {
@@ -37,11 +35,24 @@ export default function createCarsStore({ carsServices }) {
         const carList = await carsServices.getCars();
         commit('changeCars', carList);
       },
+
+      sendCar({ commit }, payload) {
+        payload ? commit('addCars', payload) : console.log('No data to add');
+      },
     },
 
     mutations: {
       changeCars(state, payload) {
         state.cars = payload;
+      },
+
+      addCars(state, payload) {
+        state.cars.push(payload);
+      },
+
+      removeCarFromList(state, payload) {
+        const itemIndex = state.cars.indexOf(payload);
+        state.cars.splice(itemIndex, 1);
       },
     },
   };
