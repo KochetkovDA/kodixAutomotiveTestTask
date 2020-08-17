@@ -3,9 +3,11 @@ import { mapActions, mapGetters } from 'vuex';
 
 import headerBar from '@/components/header';
 import footerBar from '@/components/footer';
+import carsTable from '@/components/table';
+import addCarForm from '@/components/addCarForm';
 export default {
   name: 'Page',
-  components: { headerBar, footerBar },
+  components: { headerBar, footerBar, carsTable, addCarForm },
   computed: {
     ...mapGetters('cars', ['carsList']),
   },
@@ -14,7 +16,7 @@ export default {
   },
 
   methods: {
-    ...mapActions('cars', ['fetchCars']),
+    ...mapActions('cars', ['fetchCars', 'sendCar']),
   },
 };
 </script>
@@ -23,11 +25,8 @@ export default {
   <div>
     <header-bar></header-bar>
     <div class="content-wrapper">
-      <ul>
-        <li v-for="(car, index) in carsList" :key="`${car.id}_${index}`">
-          {{ car }}
-        </li>
-      </ul>
+      <addCarForm :send-car="sendCar"></addCarForm>
+      <carsTable :rows-data="carsList"></carsTable>
     </div>
     <footerBar></footerBar>
   </div>
@@ -35,8 +34,14 @@ export default {
 
 <style lang="scss" scoped>
 .content-wrapper {
-  padding-top: 104px;
-  width: 100%;
+  padding: 104px 10px 5px 10px;
+  margin: 0 auto;
+  max-width: 958px;
+  display: flex;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
   overflow: auto;
 }
 </style>
