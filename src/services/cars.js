@@ -5,7 +5,6 @@ export default {
 
     return await fetch(url)
       .then(respData => {
-        console.log('i`m here!', respData);
         return respData.json().then(data => data);
       })
       .catch(e => {
